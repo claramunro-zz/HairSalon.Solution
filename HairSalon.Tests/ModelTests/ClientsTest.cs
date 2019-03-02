@@ -80,6 +80,35 @@ namespace HairSalon.Tests
         CollectionAssert.AreEqual(newList, result);
       }
 
+      [TestMethod]
+      public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
+        {
+          //Arrange
+          string description = "Walk the dog.";
+          Client newClient = new Client(description);
+
+          //Act
+          int result = newClient.GetId();
+
+          //Assert
+          Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Find_ReturnsCorrectClient_Client()
+          {
+            //Arrange
+            string description01 = "Walk the dog";
+            string description02 = "Wash the dishes";
+            Client newItem1 = new Client(description01);
+            Client newItem2 = new Client(description02);
+
+            //Act
+            Client result = Client.Find(2);
+
+            //Assert
+            Assert.AreEqual(newItem2, result);
+          }
 
 
     }
