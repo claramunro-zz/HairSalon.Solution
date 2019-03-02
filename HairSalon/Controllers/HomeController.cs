@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using HairSalon.Models;
 
 namespace HairSalon.Controllers
@@ -6,13 +7,25 @@ namespace HairSalon.Controllers
   public class HomeController : Controller
   {
 
-    [Route("/")]
+    [HttpGet("/")]
         public ActionResult Index()
         {
-        Client starterItem = new Client("Add first item to To Do List");
-        return View(starterItem);
+        List<Client> allClients = Client.GetAll();
+        return View(allClients);
+        }
+
+    [HttpGet("/clients/new")]
+        public ActionResult CreateForm()
+        {
+        return View();
         }
     
+    [HttpPost("/clients")]
+        public ActionResult Create(string description)
+        {
+        Client myClient = new Client(description);
+        return RedirectToAction("Index");
+        }
 
 
   }
