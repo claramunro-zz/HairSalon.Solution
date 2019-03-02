@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ToDoList
+namespace HairSalon
 {
   public class Startup
   {
@@ -25,6 +25,7 @@ namespace ToDoList
 
     public void Configure(IApplicationBuilder app)
     {
+      app.UseDeveloperExceptionPage();
       app.UseMvc(routes =>
       {
         routes.MapRoute(
