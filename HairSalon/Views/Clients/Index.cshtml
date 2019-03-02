@@ -11,7 +11,7 @@
 {
   @foreach (Client client in Model)
   {
-    <li>@client.GetDescription()</li>
+    <li><a href='/clients/@client.GetId()'>@client.GetDescription()</a></li>
   }
 }
 

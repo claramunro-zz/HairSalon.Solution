@@ -15,7 +15,7 @@ namespace HairSalon.Controllers
         }
 
     [HttpGet("/clients/new")]
-        public ActionResult CreateForm()
+        public ActionResult New()
         {
         return View();
         }
@@ -25,6 +25,20 @@ namespace HairSalon.Controllers
         {
         Client myClient = new Client(description);
         return RedirectToAction("Index");
+        }
+    
+    [HttpPost("/clients/delete")]
+        public ActionResult DeleteAll()
+        {
+        Client.ClearAll();
+        return View();
+        }
+
+      [HttpGet("/clients/{id}")]
+        public ActionResult Show(int id)
+        {
+        Client client = Client.Find(id);
+        return View(client);
         }
 
 

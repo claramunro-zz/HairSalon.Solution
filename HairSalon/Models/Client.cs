@@ -5,11 +5,13 @@ namespace HairSalon.Models
   public class Client
   {
    private string _description;
+   private int _id;
    private static List<Client> _instances = new List<Client> {};
 
     public Client (string description)
       {
         _description = description;
+        _id = _instances.Count;
         _instances.Add(this);
       }
 
@@ -23,6 +25,11 @@ namespace HairSalon.Models
         _description = newDescription;
       }
 
+    public int GetId()
+      {
+        return _id;
+      }
+
     public static List<Client> GetAll()
     {
         return _instances;
@@ -32,6 +39,12 @@ namespace HairSalon.Models
     {
       _instances.Clear();
     }
+
+     public static Client Find(int searchId)
+    {
+      return _instances[searchId-1];
+    }
+
 
   }
 }
