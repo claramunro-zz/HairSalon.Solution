@@ -51,7 +51,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetAll_ReturnsEmptyList_ItemList()
+    public void GetAll_ReturnsEmptyList_ClientList()
       {
         // Arrange
         List<Client> newList = new List<Client> { };
@@ -64,7 +64,7 @@ namespace HairSalon.Tests
       }
 
     [TestMethod]
-    public void GetAll_ReturnsItems_ItemList()
+    public void GetAll_ReturnsClients_ClientList()
       {
         //Arrange
         string description01 = "Zoey";
@@ -81,7 +81,7 @@ namespace HairSalon.Tests
       }
 
       [TestMethod]
-      public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
+      public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
         {
           //Arrange
           string description = "Walk the dog.";
@@ -100,14 +100,14 @@ namespace HairSalon.Tests
             //Arrange
             string description01 = "Walk the dog";
             string description02 = "Wash the dishes";
-            Client newItem1 = new Client(description01);
-            Client newItem2 = new Client(description02);
+            Client newClient1 = new Client(description01);
+            Client newClient2 = new Client(description02);
 
             //Act
             Client result = Client.Find(2);
 
             //Assert
-            Assert.AreEqual(newItem2, result);
+            Assert.AreEqual(newClient2, result);
           }
 
 
