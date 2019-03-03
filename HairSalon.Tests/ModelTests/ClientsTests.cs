@@ -2,6 +2,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
 using HairSalon.Models;
+using MySql.Data.MySqlClient;
+
 
 namespace HairSalon.Tests
 {
@@ -11,6 +13,11 @@ namespace HairSalon.Tests
     public void Dispose()
     {
       Client.ClearAll();
+    }
+
+      public ClientTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=clara_munro_test;";
     }
 
     [TestMethod]
