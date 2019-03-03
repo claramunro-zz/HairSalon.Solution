@@ -14,11 +14,6 @@ namespace HairSalon.Models
       _id = id;
     }
 
-     public override int GetHashCode()
-        {
-            return this.GetId().GetHashCode();
-        }
-
     public string GetName()
     {
       return _name;
