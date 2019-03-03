@@ -57,18 +57,18 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedDescription, result);
     }
 
-    // [TestMethod]
-    // public void GetAll_ReturnsEmptyList_ClientList()
-    //   {
-    //     // Arrange
-    //     List<Client> newList = new List<Client> { };
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_ClientList()
+      {
+        // Arrange
+        List<Client> newList = new List<Client> { };
 
-    //     // Act
-    //     List<Client> result = Client.GetAll();
+        // Act
+        List<Client> result = Client.GetAll();
 
-    //     // Assert
-    //     CollectionAssert.AreEqual(newList, result);
-    //   }
+        // Assert
+        CollectionAssert.AreEqual(newList, result);
+      }
 
     // [TestMethod]
     // public void GetAll_ReturnsClients_ClientList()
