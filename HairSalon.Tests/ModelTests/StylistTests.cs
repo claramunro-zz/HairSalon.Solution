@@ -103,7 +103,7 @@ namespace HairSalon.Tests
         {
             //Arrange
             string description = "Walk the dog.";
-            Client newClient = new Client(description);
+            Client newClient = new Client(description, 1);
             List<Client> newList = new List<Client> { newClient };
             string name = "Work";
             Stylist newStylist = new Stylist(name);
