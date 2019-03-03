@@ -25,14 +25,14 @@ namespace HairSalon.Models
         _description = newDescription;
       }
 
-    // public int GetId()
-    //   {
-    //     return _id;
-    //   }
+    public int GetId()
+      {
+          return 0;
+      }
 
     public static List<Client> GetAll()
       {
-      List<Client> allClients = new List<Client> {};
+      List<Client> allClients = new List<Client> { };
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
@@ -42,7 +42,7 @@ namespace HairSalon.Models
       {
         int clientId = rdr.GetInt32(0);
         string clientDescription = rdr.GetString(1);
-        Client newClient = new Client(clientDescription, clientId);
+        Client newClient = new Client(clientDescription);
         allClients.Add(newClient);
       }
       conn.Close();
@@ -68,10 +68,11 @@ namespace HairSalon.Models
       }
     }
 
-    //  public static Client Find(int searchId)
-    // {
-    //   return _instances[searchId-1];
-    // }
+     public static Client Find(int searchId)
+    {
+    Client dummyClient = new Client("dummy Client");
+    return dummyClient;
+    }
 
 
   }
