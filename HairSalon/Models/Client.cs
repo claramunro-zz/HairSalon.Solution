@@ -6,12 +6,12 @@ namespace HairSalon.Models
   public class Client
   {
    private string _description;
-   // private int _id;
+   private int _id;
 
-    public Client (string description)
+    public Client (string description, int id = 0)
       {
         _description = description;
-        // _id = _instances.Count;
+        _id = id;
       }
 
 
@@ -27,8 +27,11 @@ namespace HairSalon.Models
 
     public int GetId()
       {
-          return 0;
+          return _id;
       }
+
+
+
 
     public static List<Client> GetAll()
       {
@@ -42,7 +45,7 @@ namespace HairSalon.Models
       {
         int clientId = rdr.GetInt32(0);
         string clientDescription = rdr.GetString(1);
-        Client newClient = new Client(clientDescription);
+        Client newClient = new Client(clientDescription, clientId);
         allClients.Add(newClient);
       }
       conn.Close();
@@ -53,6 +56,8 @@ namespace HairSalon.Models
       
       return allClients;
       }
+
+
 
     public static void ClearAll()
     {
@@ -68,13 +73,39 @@ namespace HairSalon.Models
       }
     }
 
-    public static Client Find(int searchId)
-    {
-    Client dummyClient = new Client("dummy Client");
-    return dummyClient;
-    }
 
-        public override bool Equals(System.Object otherClient)
+
+     public static Client Find(int id)
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM `clients` WHERE id = @thisId;";
+        MySqlParameter thisId = new MySqlParameter();
+        thisId.ParameterName = "@thisId";
+        thisId.Value = id;
+        cmd.Parameters.Add(thisId);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        int clientId = 0;
+        string clientDescription = "";
+        while (rdr.Read())
+        {
+          clientId = rdr.GetInt32(0);
+          clientDescription = rdr.GetString(1);
+        }
+        Client foundClient= new Client(clientDescription, clientId);  // This line is new!
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return foundClient;  // This line is new!
+      }
+
+
+
+
+    public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
       {
@@ -83,27 +114,60 @@ namespace HairSalon.Models
       else
       {
         Client newClient = (Client) otherClient;
+        bool idEquality = (this.GetId() == newClient.GetId());
         bool descriptionEquality = (this.GetDescription() == newClient.GetDescription());
-        return (descriptionEquality);
+        return (idEquality && descriptionEquality);
       }
     }
 
 
+
+
     public void Save()
+   {
+     MySqlConnection conn = DB.Connection();
+     conn.Open();
+     var cmd = conn.CreateCommand() as MySqlCommand;
+     cmd.CommandText = @"INSERT INTO clients (description) VALUES (@ClientDescription);";
+     MySqlParameter description = new MySqlParameter();
+     description.ParameterName = "@ClientDescription";
+     description.Value = this._description;
+     cmd.Parameters.Add(description);    
+     cmd.ExecuteNonQuery();    // This line is new!
+     _id = (int) cmd.LastInsertedId;  
+
+     // One more line of logic will go here in the next lesson.
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+   }
+
+    public void Edit(string newDescription)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (description) VALUES (@ClientDescription);";
-
-      // more logic will go here in a moment
-
-        conn.Close();
-        if (conn != null)
-        {
-          conn.Dispose();
-        }
+      cmd.CommandText = @"UPDATE clients SET description = @newDescription WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+      MySqlParameter description = new MySqlParameter();
+      description.ParameterName = "@newDescription";
+      description.Value = newDescription;
+      cmd.Parameters.Add(description);
+      cmd.ExecuteNonQuery();
+      _description = newDescription; // <--- This line is new!
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
+
 
 
 

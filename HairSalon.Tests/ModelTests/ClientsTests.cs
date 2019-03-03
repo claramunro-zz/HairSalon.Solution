@@ -152,6 +152,10 @@ namespace HairSalon.Tests
         CollectionAssert.AreEqual(testList, result);
       }
 
+
+
+
+
       [TestMethod]
         public void Save_AssignsIdToObject_Id()
         {
@@ -167,6 +171,28 @@ namespace HairSalon.Tests
 
           //Assert
           Assert.AreEqual(testId, result);
+        }
+
+        
+
+
+
+
+        [TestMethod]
+        public void Edit_UpdatesClientInDatabase_String()
+        {
+          //Arrange
+          string firstDescription = "Walk the Dog";
+          Client testClient = new Client(firstDescription);
+          testClient.Save();
+          string secondDescription = "Mow the lawn";
+
+          //Act
+          testClient.Edit(secondDescription);
+          string result = Client.Find(testClient.GetId()).GetDescription();
+
+          //Assert
+          Assert.AreEqual(secondDescription, result);
         }
 
 
