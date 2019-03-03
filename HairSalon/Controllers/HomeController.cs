@@ -8,7 +8,7 @@ namespace HairSalon.Controllers
       [HttpGet("/")]
       public ActionResult Index()
       {
-        return View(0);
+        return View(Client.GetAll());
       }
 
     }
