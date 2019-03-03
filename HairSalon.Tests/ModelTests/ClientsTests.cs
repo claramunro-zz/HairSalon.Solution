@@ -198,7 +198,7 @@ namespace HairSalon.Tests
 
 
         //  [TestMethod]
-        //   public void GetStylistId_ReturnsClientsParentCategoryId_Int()
+        //   public void GetStylistId_ReturnsClientsParentStylistId_Int()
         //   {
         //     //Arrange
         //     Stylist newStylist = new Stylist("Home Tasks");
