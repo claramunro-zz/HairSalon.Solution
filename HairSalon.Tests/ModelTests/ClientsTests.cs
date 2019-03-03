@@ -197,19 +197,19 @@ namespace HairSalon.Tests
 
 
 
-         [TestMethod]
-          public void GetStylistId_ReturnsClientsParentCategoryId_Int()
-          {
-            //Arrange
-            Stylist newStylist = new Stylist("Home Tasks");
-            Client newClient = new Client("Walk the dog.", 1, newStylist.GetId());
+        //  [TestMethod]
+        //   public void GetStylistId_ReturnsClientsParentCategoryId_Int()
+        //   {
+        //     //Arrange
+        //     Stylist newStylist = new Stylist("Home Tasks");
+        //     Client newClient = new Client("Walk the dog.", 1, newStylist.GetId());
 
-            //Act
-            int result = newClient.GetStylistId();
+        //     //Act
+        //     int result = newClient.GetStylistId();
 
-            //Assert
-            Assert.AreEqual(newStylist.GetId(), result);
-          }
+        //     //Assert
+        //     Assert.AreEqual(newStylist.GetId(), result);
+        //   }
 
 
     }

@@ -32,7 +32,7 @@ namespace HairSalon.Models
           return _id;
       }
 
-  public int GetCategoryId()
+  public int GetStylistId()
       {
         return _stylistId;
       }

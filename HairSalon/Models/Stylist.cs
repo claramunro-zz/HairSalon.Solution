@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
 {
@@ -27,15 +28,42 @@ namespace HairSalon.Models
       return _id;
     }
 
-    public static void ClearAll()
-    {
-        _instances.Clear();
-    }
+      public static void ClearAll()
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"DELETE FROM stylists;";
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+      }
 
-    public static List<Stylist> GetAll()
-    {
-      return _instances;
-    }
+     public static List<Stylist> GetAll()
+      {
+        List<Stylist> allStylists = new List<Stylist> {};
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM stylists;";
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        while(rdr.Read())
+        {
+          int StylistId = rdr.GetInt32(0);
+          string StylistName = rdr.GetString(1);
+          Stylist newStylist = new Stylist(StylistName);
+          allStylists.Add(newStylist);
+        }
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return allStylists;
+      }
 
     public static Stylist Find(int searchId)
     {
