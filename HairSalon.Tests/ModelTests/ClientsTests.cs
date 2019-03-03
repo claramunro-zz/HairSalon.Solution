@@ -57,65 +57,65 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedDescription, result);
     }
 
-    [TestMethod]
-    public void GetAll_ReturnsEmptyList_ClientList()
-      {
-        // Arrange
-        List<Client> newList = new List<Client> { };
+    // [TestMethod]
+    // public void GetAll_ReturnsEmptyList_ClientList()
+    //   {
+    //     // Arrange
+    //     List<Client> newList = new List<Client> { };
 
-        // Act
-        List<Client> result = Client.GetAll();
+    //     // Act
+    //     List<Client> result = Client.GetAll();
 
-        // Assert
-        CollectionAssert.AreEqual(newList, result);
-      }
+    //     // Assert
+    //     CollectionAssert.AreEqual(newList, result);
+    //   }
 
-    [TestMethod]
-    public void GetAll_ReturnsClients_ClientList()
-      {
-        //Arrange
-        string description01 = "Zoey";
-        string description02 = "Clara";
-        Client newClient1 = new Client(description01);
-        Client newClient2 = new Client(description02);
-        List<Client> newList = new List<Client> { newClient1, newClient2 };
+    // [TestMethod]
+    // public void GetAll_ReturnsClients_ClientList()
+    //   {
+    //     //Arrange
+    //     string description01 = "Zoey";
+    //     string description02 = "Clara";
+    //     Client newClient1 = new Client(description01);
+    //     Client newClient2 = new Client(description02);
+    //     List<Client> newList = new List<Client> { newClient1, newClient2 };
 
-        //Act
-        List<Client> result = Client.GetAll();
+    //     //Act
+    //     List<Client> result = Client.GetAll();
 
-        //Assert
-        CollectionAssert.AreEqual(newList, result);
-      }
+    //     //Assert
+    //     CollectionAssert.AreEqual(newList, result);
+    //   }
 
-      [TestMethod]
-      public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
-        {
-          //Arrange
-          string description = "Walk the dog.";
-          Client newClient = new Client(description);
+    //   [TestMethod]
+    //   public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
+    //     {
+    //       //Arrange
+    //       string description = "Walk the dog.";
+    //       Client newClient = new Client(description);
 
-          //Act
-          int result = newClient.GetId();
+    //       //Act
+    //       int result = newClient.GetId();
 
-          //Assert
-          Assert.AreEqual(1, result);
-        }
+    //       //Assert
+    //       Assert.AreEqual(1, result);
+    //     }
 
-        [TestMethod]
-        public void Find_ReturnsCorrectClient_Client()
-          {
-            //Arrange
-            string description01 = "Walk the dog";
-            string description02 = "Wash the dishes";
-            Client newClient1 = new Client(description01);
-            Client newClient2 = new Client(description02);
+    //     [TestMethod]
+    //     public void Find_ReturnsCorrectClient_Client()
+    //       {
+    //         //Arrange
+    //         string description01 = "Walk the dog";
+    //         string description02 = "Wash the dishes";
+    //         Client newClient1 = new Client(description01);
+    //         Client newClient2 = new Client(description02);
 
-            //Act
-            Client result = Client.Find(2);
+    //         //Act
+    //         Client result = Client.Find(2);
 
-            //Assert
-            Assert.AreEqual(newClient2, result);
-          }
+    //         //Assert
+    //         Assert.AreEqual(newClient2, result);
+    //       }
 
 
     }

@@ -10,32 +10,32 @@ namespace HairSalon.Tests
     public class ClientControllerTest
     {
 
-      [TestMethod]
-      public void Create_ReturnsCorrectActionType_RedirectToActionResult()
-      {
-        //Arrange
-        ClientsController controller = new ClientsController();
+      // [TestMethod]
+      // public void Create_ReturnsCorrectActionType_RedirectToActionResult()
+      // {
+      //   //Arrange
+      //   ClientsController controller = new ClientsController();
 
-        //Act
-        IActionResult view = controller.Create("Walk the dog");
+      //   //Act
+      //   IActionResult view = controller.Create("Walk the dog");
 
-        //Assert
-        Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
-      }
+      //   //Assert
+      //   Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+      // }
 
-      [TestMethod]
-      public void Create_RedirectsToCorrectAction_Index()
-      {
-        //Arrange
-        ClientsController controller = new ClientsController();
-        RedirectToActionResult actionResult = controller.Create("Walk the dog") as RedirectToActionResult;
+      // [TestMethod]
+      // public void Create_RedirectsToCorrectAction_Index()
+      // {
+      //   //Arrange
+      //   ClientsController controller = new ClientsController();
+      //   RedirectToActionResult actionResult = controller.Create("Walk the dog") as RedirectToActionResult;
 
-        //Act
-        string result = actionResult.ActionName;
+      //   //Act
+      //   string result = actionResult.ActionName;
 
-        //Assert
-        Assert.AreEqual(result, "Index");
-      }
+      //   //Assert
+      //   Assert.AreEqual(result, "Index");
+      // }
 
     }
 }
