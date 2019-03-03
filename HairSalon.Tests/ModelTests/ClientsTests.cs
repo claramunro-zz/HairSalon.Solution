@@ -117,6 +117,32 @@ namespace HairSalon.Tests
     //         Assert.AreEqual(newClient2, result);
     //       }
 
+    [TestMethod]
+      public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Client()
+      {
+        // Arrange, Act
+        Client firstClient = new Client("Mow the lawn");
+        Client secondClient = new Client("Mow the lawn");
+
+        // Assert
+        Assert.AreEqual(firstClient, secondClient);
+      }
+
+      [TestMethod]
+      public void Save_SavesToDatabase_ClientList()
+      {
+        //Arrange
+        Client testClient= new Client("Mow the lawn");
+
+        //Act
+        testClient.Save();
+        List<Client> result = Client.GetAll();
+        List<Client> testList = new List<Client>{testClient};
+
+        //Assert
+        CollectionAssert.AreEqual(testList, result);
+      }
+
 
     }
 

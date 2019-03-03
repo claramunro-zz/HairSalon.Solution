@@ -68,11 +68,43 @@ namespace HairSalon.Models
       }
     }
 
-     public static Client Find(int searchId)
+    public static Client Find(int searchId)
     {
     Client dummyClient = new Client("dummy Client");
     return dummyClient;
     }
+
+        public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+      {
+        return false;
+      }
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool descriptionEquality = (this.GetDescription() == newClient.GetDescription());
+        return (descriptionEquality);
+      }
+    }
+
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO clients (description) VALUES (@ClientDescription);";
+
+      // more logic will go here in a moment
+
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+    }
+
 
 
   }
