@@ -1,7 +1,7 @@
 <h3>Here are all the clients with this stylist:</h3>
 
 <ol>
-@foreach (var item in @Model["clients"])
+@foreach (var client in @Model["clients"])
 {
   <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetDescription()</a></li>
 }
