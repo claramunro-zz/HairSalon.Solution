@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
 using HairSalon.Models;
-using MySql.Data.MySqlClient;
 
 
 namespace HairSalon.Tests
@@ -90,20 +89,6 @@ namespace HairSalon.Tests
     CollectionAssert.AreEqual(newList, result);
   }
 
-    //   [TestMethod]
-    //   public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
-    //     {
-    //       //Arrange
-    //       string description = "Walk the dog.";
-    //       Client newClient = new Client(description);
-
-    //       //Act
-    //       int result = newClient.GetId();
-
-    //       //Assert
-    //       Assert.AreEqual(1, result);
-    //     }
-
 
 
 
@@ -182,8 +167,7 @@ namespace HairSalon.Tests
         public void Edit_UpdatesClientInDatabase_String()
         {
           //Arrange
-          string firstDescription = "Walk the Dog";
-          Client testClient = new Client(firstDescription, 1);
+          Client testClient = new Client("Walk the Dog", 1);
           testClient.Save();
           string secondDescription = "Mow the lawn";
 

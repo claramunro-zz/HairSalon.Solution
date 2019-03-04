@@ -1,19 +1,18 @@
 using System.Collections.Generic;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
+using HairSalon.Controllers;
 
-namespace HairSalon.Controllers
+namespace HairSalon.Tests
 {
-  public class StylistController : Controller
-  {
 
-    [HttpGet("/stylists")]
-    public ActionResult Index()
+    [TestClass]
+    public class StylistControllerTest
     {
-      List<Stylist> allStylists = Stylist.GetAll();
-      return View(allStylists);
-    }
+       
+       // stuff
 
+    }
+    
   }
-}
