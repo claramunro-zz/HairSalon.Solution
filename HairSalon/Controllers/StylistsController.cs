@@ -15,20 +15,21 @@ namespace HairSalon.Controllers
       return View(allStylists);
     }
 
-[HttpGet("/stylists/new")]
-    public ActionResult New()
-    {
-        return View();
-    }
+  [HttpGet("/stylists/new")]
+      public ActionResult New()
+      {
+          return View();
+      }
 
 
- [HttpPost("/stylists")]
-    public ActionResult Create(string categoryName)
-    {
-      Stylist newStylist = new Stylist(categoryName);
-      List<Stylist> allStylists = Stylist.GetAll();
-      return View("Index", allStylists);
-    }
+  [HttpPost("/stylists")]
+      public ActionResult Create(string stylistName)
+      {
+        Stylist newStylist = new Stylist(stylistName);
+        newStylist.Save();
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View("Index", allStylists);
+      }
 
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
@@ -43,7 +44,6 @@ namespace HairSalon.Controllers
 
 
 // This one creates new Clients within a given Stylist, not new Stylists:
-
 [HttpPost("/stylists/{stylistId}/clients")]
     public ActionResult Create(int stylistId, string clientDescription)
     {
@@ -54,7 +54,7 @@ namespace HairSalon.Controllers
      // foundStylist.AddClient(newClient);
       List<Client> stylistClients = foundStylist.GetClients();
       model.Add("clients", stylistClients);
-      model.Add("stylists", foundStylist);
+      model.Add("stylist", foundStylist);
       return View("Show", model);
     }
 
