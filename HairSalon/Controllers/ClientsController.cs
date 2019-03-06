@@ -7,6 +7,7 @@ namespace HairSalon.Controllers
   public class ClientsController : Controller
   {
 
+
       [HttpGet("/stylists/{stylistId}/clients/new")]
         public ActionResult New(int stylistId)
         {
@@ -26,13 +27,6 @@ namespace HairSalon.Controllers
         return View(model);
         }
 
-    
-    [HttpPost("/clients/delete")]
-        public ActionResult DeleteAll()
-        {
-        Client.ClearAll();
-        return View();
-        }
 
       [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
         public ActionResult Edit(int stylistId, int clientId)
@@ -44,6 +38,7 @@ namespace HairSalon.Controllers
           model.Add("client", client);
           return View(model);
         }
+
 
         [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
         public ActionResult Update(int stylistId, int clientId, string newDescription)
@@ -57,6 +52,13 @@ namespace HairSalon.Controllers
           return View("Show", model);
         }
 
+
+      // [HttpPost("/clients/delete")]
+      //         public ActionResult DeleteAll()
+      //         {
+      //         Client.ClearAll();
+      //         return View();
+      //         }
 
 
   }

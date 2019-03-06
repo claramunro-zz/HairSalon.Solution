@@ -8,12 +8,15 @@ namespace HairSalon.Controllers
   public class StylistsController : Controller
   {
 
+// 5
+
   [HttpGet("/stylists")]
     public ActionResult Index()
     {
       List<Stylist> allStylists = Stylist.GetAll();
       return View(allStylists);
     }
+
 
   [HttpGet("/stylists/new")]
       public ActionResult New()
@@ -30,6 +33,7 @@ namespace HairSalon.Controllers
         List<Stylist> allStylists = Stylist.GetAll();
         return View("Index", allStylists);
       }
+
 
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
