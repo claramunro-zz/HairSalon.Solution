@@ -52,6 +52,10 @@ namespace HairSalon.Models
             return allStylists;
         }
 
+
+
+
+
         public static Stylist Find(int id)
         {
             MySqlConnection conn = DB.Connection();
@@ -78,6 +82,9 @@ namespace HairSalon.Models
             }
             return newStylist;
         }
+
+
+        
         public List<Client> GetClients()
         {
             MySqlConnection conn = DB.Connection();
