@@ -56,55 +56,49 @@ namespace HairSalon.Controllers
         }
 
 
-          [HttpGet("clients/{clientId}/edit")]
-            public ActionResult Edit(int clientId)
-            {
-              Dictionary<string, object> model = new Dictionary<string, object>();
-              Client client = Client.Find(clientId);
-              model.Add("client", client);
-              return View(model);
-            }
+        [HttpGet("clients/{clientId}/edit")]
+        public ActionResult Edit(int clientId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Client client = Client.Find(clientId);
+            model.Add("client", client);
+            return View(model);
+        }
 
 
-            [HttpPost("/clients/{clientId}")]
-            public ActionResult Update(int clientId, string newDescription)
-            {
-              Client client = Client.Find(clientId);
-              client.Edit(newDescription);
-              Dictionary<string, object> model = new Dictionary<string, object>();
+        [HttpPost("/clients/{clientId}")]
+        public ActionResult Update(int clientId, string newDescription)
+        {
+            Client client = Client.Find(clientId);
+            client.Edit(newDescription);
+            Dictionary<string, object> model = new Dictionary<string, object>();
 
-              List<Stylist> clientStylists = client.GetStylists();
-              List<Stylist> allStylists = Stylist.GetAll();
+            List<Stylist> clientStylists = client.GetStylists();
+            List<Stylist> allStylists = Stylist.GetAll();
 
-              model.Add("selectedClient", client);
-              model.Add("clientStylists", clientStylists);
-              model.Add("allStylists", allStylists);
-              return View("Show", model);
-            }
-
-
-              [HttpGet("/clients/{clientId}/delete")]
-              public ActionResult Delete(int clientId)
-              {
-                  Dictionary<string, object> model = new Dictionary<string, object>();
-                  Client clientIdD = Client.Find(clientId);
-                  clientIdD.Delete();
-                  model.Add("client", clientIdD);
-                  return View(model);
-              }
+            model.Add("selectedClient", client);
+            model.Add("clientStylists", clientStylists);
+            model.Add("allStylists", allStylists);
+            return View("Show", model);
+        }
 
 
+        [HttpGet("/clients/{clientId}/delete")]
+        public ActionResult Delete(int clientId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Client clientIdD = Client.Find(clientId);
+            clientIdD.Delete();
+            model.Add("client", clientIdD);
+            return View(model);
+        }
 
-
-
-
-
-        // [HttpPost("/clients/deleteall")]
-        //         public ActionResult DeleteAll()
-        //         {
-        //         Client.ClearAll();
-        //         return View();
-        //         }
+        [HttpGet("/clients/deleteall")]
+        public ActionResult DeleteAll()
+        {
+            Client.ClearAll();
+            return View();
+        }
 
 
     }

@@ -58,23 +58,23 @@ namespace HairSalon.Controllers
         }
 
 
-         [HttpGet("/stylists/{stylistId}/edit")]
-          public ActionResult Edit(int stylistId)
-          {
+        [HttpGet("/stylists/{stylistId}/edit")]
+        public ActionResult Edit(int stylistId)
+        {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Stylist stylist = Stylist.Find(stylistId);
             model.Add("stylist", stylist);
             return View(model);
-          }
+        }
 
 
-          [HttpPost("/stylists/{stylistId}")]
-          public ActionResult Update(int stylistId, string newName)
-          {
+        [HttpPost("/stylists/{stylistId}")]
+        public ActionResult Update(int stylistId, string newName)
+        {
             Stylist stylist = Stylist.Find(stylistId);
             stylist.Edit(newName);
             Dictionary<string, object> model = new Dictionary<string, object>();
-          
+
             List<Client> stylistClients = stylist.GetClients();
             List<Client> allClients = Client.GetAll();
 
@@ -82,26 +82,26 @@ namespace HairSalon.Controllers
             model.Add("stylistClients", stylistClients);
             model.Add("allClients", allClients);
             return View("Show", model);
-          }
+        }
 
 
-            [HttpGet("/stylists/{stylistId}/delete")]
-            public ActionResult Delete(int stylistId)
-            {
-                Dictionary<string, object> model = new Dictionary<string, object>();
-                Stylist stylistIdD = Stylist.Find(stylistId);
-                stylistIdD.Delete();
-                model.Add("stylist", stylistIdD);
-                return View(model);
-            }
+        [HttpGet("/stylists/{stylistId}/delete")]
+        public ActionResult Delete(int stylistId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Stylist stylistIdD = Stylist.Find(stylistId);
+            stylistIdD.Delete();
+            model.Add("stylist", stylistIdD);
+            return View(model);
+        }
 
 
-          // [HttpPost("/clients/deleteall")]
-          //         public ActionResult DeleteAll()
-          //         {
-          //         Client.ClearAll();
-          //         return View();
-          //         }
+        [HttpGet("/stylists/deleteall")]
+        public ActionResult DeleteAll()
+        {
+            Stylist.ClearAll();
+            return View();
+        }
 
 
 
