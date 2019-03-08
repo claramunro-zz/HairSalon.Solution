@@ -3,165 +3,88 @@ using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
 {
-  public class Client
-  {
-   private string _description;
-   private int _id;
-
-    public Client (string description, int id = 0)
-      {
-        _description = description;
-        _id = id;
-      }
-
-
-    public string GetDescription()
-      {
-        return _description;
-      }
-
-    public void SetDescription(string newDescription)
-      {
-        _description = newDescription;
-      }
-
-    public int GetId()
-      {
-          return _id;
-      }
-
-
-
-    public static List<Client> GetAll()
+    public class Client
     {
-      List<Client> allClients = new List<Client> {};
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients;";
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        int clientId = rdr.GetInt32(0);
-        string clientDescription = rdr.GetString(1);
-        Client newClient = new Client(clientDescription, clientId);
-        allClients.Add(newClient);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return allClients;
-    }
+        private string _description;
+        private int _id;
 
-
-
-    public static void ClearAll()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM clients;";
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
-
-
-
-     public static Client Find(int id)
-  {
-    MySqlConnection conn = DB.Connection();
-    conn.Open();
-    var cmd = conn.CreateCommand() as MySqlCommand;
-    cmd.CommandText = @"SELECT * FROM clients WHERE id = (@searchId);";
-    MySqlParameter searchId = new MySqlParameter();
-    searchId.ParameterName = "@searchId";
-    searchId.Value = id;
-    cmd.Parameters.Add(searchId);
-    var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    int clientId = 0;
-    string clientName = "";
-    while(rdr.Read())
-    {
-      clientId = rdr.GetInt32(0);
-      clientName = rdr.GetString(1);
-    }
-    Client newClient = new Client(clientName, clientId);
-    conn.Close();
-    if (conn != null)
-    {
-      conn.Dispose();
-    }
-    return newClient;
-  }
-
-
-
-
-    public override bool Equals(System.Object otherClient)
-    {
-      if (!(otherClient is Client))
-      {
-        return false;
-      }
-      else
-      {
-        Client newClient = (Client) otherClient;
-        bool idEquality = (this.GetId() == newClient.GetId());
-        bool descriptionEquality = (this.GetDescription() == newClient.GetDescription());
-        return (idEquality && descriptionEquality);
-      }
-    }
-
-
-
-
-     public void Save()
-      {
-        MySqlConnection conn = DB.Connection();
-        conn.Open();
-        var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO clients (description, stylist_id) VALUES (@description, @stylist_id);";
-        MySqlParameter description = new MySqlParameter();
-        description.ParameterName = "@description";
-        description.Value = this._description;
-        cmd.Parameters.Add(description);
-        cmd.ExecuteNonQuery();
-        _id = (int) cmd.LastInsertedId;
-        conn.Close();
-        if (conn != null)
+        public Client(string description, int id = 0)
         {
-          conn.Dispose();
+            _description = description;
+            _id = id;
         }
-      }
 
-    public void Edit(string newDescription)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE clients SET description = @newDescription WHERE id = @searchId;";
-      MySqlParameter searchId = new MySqlParameter();
-      searchId.ParameterName = "@searchId";
-      searchId.Value = _id;
-      cmd.Parameters.Add(searchId);
-      MySqlParameter description = new MySqlParameter();
-      description.ParameterName = "@newDescription";
-      description.Value = newDescription;
-      cmd.Parameters.Add(description);
-      cmd.ExecuteNonQuery();
-      _description = newDescription; // <--- This line is new!
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
+
+        public string GetDescription()
+        {
+            return _description;
+        }
+
+        public void SetDescription(string newDescription)
+        {
+            _description = newDescription;
+        }
+
+        public int GetId()
+        {
+            return _id;
+        }
+
+
+
+        public static List<Client> GetAll()
+        {
+            List<Client> allClients = new List<Client> { };
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM clients;";
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                int clientId = rdr.GetInt32(0);
+                string clientDescription = rdr.GetString(1);
+                Client newClient = new Client(clientDescription, clientId);
+                allClients.Add(newClient);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allClients;
+        }
+
+
+
+        public static Client Find(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM clients WHERE id = (@searchId);";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = id;
+            cmd.Parameters.Add(searchId);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            int clientId = 0;
+            string clientName = "";
+            while (rdr.Read())
+            {
+                clientId = rdr.GetInt32(0);
+                clientName = rdr.GetString(1);
+            }
+            Client newClient = new Client(clientName, clientId);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return newClient;
+        }
+
+
         public List<Stylist> GetStylists()
         {
             MySqlConnection conn = DB.Connection();
@@ -196,51 +119,142 @@ namespace HairSalon.Models
         }
 
 
-    
-    public void AddStylist(Stylist newStylist)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
-      MySqlParameter stylist_id = new MySqlParameter();
-      stylist_id.ParameterName = "@StylistId";
-      stylist_id.Value = newStylist.GetId();
-      cmd.Parameters.Add(stylist_id);
-      MySqlParameter client_id = new MySqlParameter();
-      client_id.ParameterName = "@ClientId";
-      client_id.Value = _id;
-      cmd.Parameters.Add(client_id);
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
 
-
-
-    public void Delete()
-      {
-        MySqlConnection conn = DB.Connection();
-        conn.Open();
-        var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"DELETE FROM clients WHERE id = @ClientId; DELETE FROM stylists_clients WHERE client_id = @ClientId;";
-        MySqlParameter clientIdParameter = new MySqlParameter();
-        clientIdParameter.ParameterName = "@ClientId";
-        clientIdParameter.Value = this.GetId();
-        cmd.Parameters.Add(clientIdParameter);
-        cmd.ExecuteNonQuery();
-        if (conn != null)
+        public override bool Equals(System.Object otherClient)
         {
-          conn.Close();
+            if (!(otherClient is Client))
+            {
+                return false;
+            }
+            else
+            {
+                Client newClient = (Client)otherClient;
+                bool idEquality = (this.GetId() == newClient.GetId());
+                bool descriptionEquality = (this.GetDescription() == newClient.GetDescription());
+                return (idEquality && descriptionEquality);
+            }
         }
-      }
+
+
+         public void Save()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO clients (description) VALUES (@description);";
+            MySqlParameter description = new MySqlParameter();
+            description.ParameterName = "@description";
+            description.Value = this._description;
+            cmd.Parameters.Add(description);
+            cmd.ExecuteNonQuery();
+            _id = (int)cmd.LastInsertedId;
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void Edit(string newDescription)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE clients SET description = @newDescription WHERE id = @searchId;";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = _id;
+            cmd.Parameters.Add(searchId);
+            MySqlParameter description = new MySqlParameter();
+            description.ParameterName = "@newDescription";
+            description.Value = newDescription;
+            cmd.Parameters.Add(description);
+            cmd.ExecuteNonQuery();
+            _description = newDescription;
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+
+
+        public void AddStylist(Stylist newStylist)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@stylistId, @clientId);";
+            MySqlParameter stylist_id = new MySqlParameter();
+            stylist_id.ParameterName = "@stylistId";
+            stylist_id.Value = newStylist.GetId();
+            cmd.Parameters.Add(stylist_id);
+            MySqlParameter client_id = new MySqlParameter();
+            client_id.ParameterName = "@clientId";
+            client_id.Value = _id;
+            cmd.Parameters.Add(client_id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+
+
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM clients WHERE id = @clientId; DELETE FROM stylists_clients WHERE client_id = @clientId;";
+            MySqlParameter clientIdParameter = new MySqlParameter();
+            clientIdParameter.ParameterName = "@clientId";
+            clientIdParameter.Value = this.GetId();
+            cmd.Parameters.Add(clientIdParameter);
+            cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+
+              public static void ClearAll()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM clients;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+
+
+        //  public static void DeleteAll()
+        //   {
+        //       MySqlConnection conn = DB.Connection();
+        //       conn.Open();
+        //       var cmd = conn.CreateCommand() as MySqlCommand;
+        //       cmd.CommandText = @"DELETE FROM stylists;";
+        //       cmd.ExecuteNonQuery();
+        //       conn.Close();
+        //       if (conn != null)
+        //       {
+        //           conn.Dispose();
+        //       }
+        //   }
 
 
 
 
 
-  }
+    }
 }

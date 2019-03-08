@@ -12,60 +12,60 @@ namespace HairSalon.Tests
 
 
 
-  [TestMethod]
-    public void New_ReturnsCorrectView_True()
-    {
-        //Arrange
-        ClientsController controller = new ClientsController();
-        
-        // Act
-        ActionResult view = controller.New(3);
-        
-        // Assert
-        Assert.IsInstanceOfType(view, typeof(ViewResult));
-    }
+        [TestMethod]
+        public void New_ReturnsCorrectView_True()
+        {
+            //Arrange
+            ClientsController controller = new ClientsController();
+
+            // Act
+            ActionResult view = controller.New(3);
+
+            // Assert
+            Assert.IsInstanceOfType(view, typeof(ViewResult));
+        }
 
 
-  [TestMethod]
-    public void Showw_ReturnsCorrectView_True()
-    {
-        // Arrange
-        ClientsController controller = new ClientsController();
+        [TestMethod]
+        public void Showw_ReturnsCorrectView_True()
+        {
+            // Arrange
+            ClientsController controller = new ClientsController();
 
-        // Act
-        ActionResult newView = controller.Show(1, 2);
+            // Act
+            ActionResult newView = controller.Show(1, 2);
 
-        // Assert
-        Assert.IsInstanceOfType(newView, typeof(ViewResult));
-    }
-
-
-  [TestMethod]
-    public void Edit_ReturnsCorrectView_True()
-    {
-        // Arrange
-        ClientsController controller = new ClientsController();
-        
-        // Act
-        ActionResult newView = controller.Edit(1, 2);
-        
-        // Assert
-        Assert.IsInstanceOfType(newView, typeof(ViewResult));
-    }
+            // Assert
+            Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        }
 
 
-  [TestMethod]
-    public void Update_ReturnsCorrecttView_True()
-    {
-        // Arrange
-        ClientsController controller = new ClientsController();
-        
-        // Act
-        ActionResult newView = controller.Update(1, 2, "tessst");
-        
-        // Assert
-        Assert.IsInstanceOfType(newView, typeof(ViewResult));
-    }
+        [TestMethod]
+        public void Edit_ReturnsCorrectView_True()
+        {
+            // Arrange
+            ClientsController controller = new ClientsController();
+
+            // Act
+            ActionResult newView = controller.Edit(1, 2);
+
+            // Assert
+            Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        }
+
+
+        [TestMethod]
+        public void Update_ReturnsCorrecttView_True()
+        {
+            // Arrange
+            ClientsController controller = new ClientsController();
+
+            // Act
+            ActionResult newView = controller.Update(1, 2, "tessst");
+
+            // Assert
+            Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        }
 
 
 

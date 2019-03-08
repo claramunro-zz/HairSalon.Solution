@@ -3,11 +3,11 @@
 <h1>Hair Salon</h1>
 <hr>
 
-<h2>Stylist: @Model["stylist"].GetName()</h2>
+<h2>Stylist: @Model["selectedStylist"].GetName()</h2>
 <hr />
-EDIT STYLIST BUTTON HERE
+<a href='/stylists/@Model["selectedStylist"].GetId()/edit'>Edit Stylist Name</a>
 <hr />
-DELETE STYLIST BUTTON HERE
+<a href='/stylists/@Model["selectedStylist"].GetId()/delete'>Delete Stylist</a>
 <hr />
 
 @if (@Model["stylistClients"].Count != 0)
@@ -23,7 +23,7 @@ DELETE STYLIST BUTTON HERE
 
 <h4>Add a client to this stylist:</h4>
 
-<form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
+<form action='/stylists/@Model["selectedStylist"].GetId()/clients/new' method='post'>
   <label for='clientId'>Select A Client</label>
   <select id='clientId' name='clientId' type='text'>
 
@@ -38,5 +38,5 @@ DELETE STYLIST BUTTON HERE
 
 <hr>
 
-<h4><a href="/clients">View All Clients</a></h4>
+<h4><a href="/stylists">View All Stylists</a></h4>
 <h4><a href="/">Home</a></h4>

@@ -10,62 +10,62 @@ namespace HairSalon.Tests
     [TestClass]
     public class StylistControllerTest
     {
-       
 
 
-      [TestMethod]
+
+        [TestMethod]
         public void Index_ReturnsCorrectView_True()
         {
             // arrange
             StylistsController controller = new StylistsController();
-           
-           // act
+
+            // act
             ActionResult indexView = controller.Index();
-           
-           // assert
+
+            // assert
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
         }
 
 
-      [TestMethod]
+        [TestMethod]
         public void New_ReturnsCorrectView_True()
         {
             // arrange
             StylistsController controller = new StylistsController();
-            
+
             // act
             ActionResult newView = controller.New();
-            
+
             // assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
         }
 
 
 
-      [TestMethod]
-         public void Create_ReturnsCorrectView_True()
-         {
+        [TestMethod]
+        public void Create_ReturnsCorrectView_True()
+        {
             // Arrange
             StylistsController controller = new StylistsController();
-            
+
             // Act
             ActionResult newView = controller.Create("tessst");
-            
+
             // Assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
-         }
+        }
 
 
 
-      [TestMethod]
+        [TestMethod]
         public void Show_ReturnsCorrectView_True()
         {
             // arrange
             StylistsController controller = new StylistsController();
-            
+
             // act
             ActionResult newView = controller.Show(6);
-            
+
             // assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
         }
@@ -74,5 +74,5 @@ namespace HairSalon.Tests
 
 
     }
-    
-  }
+
+}

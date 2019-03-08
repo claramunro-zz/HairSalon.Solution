@@ -5,9 +5,10 @@
 
 <h2>Client: @Model["selectedClient"].GetDescription()</h2>
 <hr />
-EDIT CLIENT BUTTON HERE
+<a href='/clients/@Model["selectedClient"].GetId()/edit'>Edit Client Name</a>
+
 <hr />
-DELETE CLIENT BUTTON HERE
+<a href='/clients/@Model["selectedClient"].GetId()/delete'>Delete Client</a>
 <hr />
 
 @if (@Model["clientStylists"].Count != 0)

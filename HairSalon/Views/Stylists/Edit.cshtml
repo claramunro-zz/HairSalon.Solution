@@ -1,7 +1,7 @@
 <h1>hair salon</h1>
 <hr>
 
-<h2>Edit Stylist: @Model["stylist"].GetDescription()</h2>
+<h2>Edit Stylist: @Model["selectedStylist"].GetDescription()</h2>
 
 <form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
   <label for="newDescription">Name:</label>

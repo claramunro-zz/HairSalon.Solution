@@ -3,10 +3,10 @@
 
 <h2>Edit Client: @Model["client"].GetDescription()</h2>
 
-<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
+<form action="/clients/@Model["client"].GetId()" method="post">
   <label for="newDescription">Name:</label>
   <input type="text" name="newDescription" value="@Model["client"].GetDescription()">
   <button type="submit">Edit</button>
 </form>
 
-<h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous Client</a></h4>
+<h4><a href="/stylists/@Model["client"].GetId()">Return to previous Client</a></h4>
