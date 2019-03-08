@@ -1,8 +1,10 @@
-<h1>Add a new client to @Model.GetName()</h1>
+<h1>Add a new client</h1>
 
-<form action='/stylists/@Model.GetId()/clients' method='post'>
-  <input id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
-  <label for='clientDescription'>Client description</label>
-  <input id='clientDescription' name='clientDescription' type='text'>
-  <button type='submit'>Add Client</button>
+<form action="/clients" method="post">
+  <label for="description">Client description:</label>
+  <input id="description" name="description" type="text">
+  <button type="submit">Add new client</button>
 </form>
+
+<p><a href="/">Back home</a></p>
+<p><a href="/clients">View all clients</a></p>

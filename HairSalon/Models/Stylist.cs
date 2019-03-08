@@ -98,10 +98,10 @@ namespace HairSalon.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"SELECT clients.* FROM categories
-            JOIN categories_clients ON (categories.id = categories_clients.category_id)
+        cmd.CommandText = @"SELECT clients.* FROM stylists
+            JOIN categories_clients ON (stylists.id = categories_clients.category_id)
             JOIN clients ON (categories_clients.client_id = clients.id)
-            WHERE categories.id = @CategoryId;";
+            WHERE stylists.id = @CategoryId;";
         MySqlParameter categoryIdParameter = new MySqlParameter();
         categoryIdParameter.ParameterName = "@CategoryId";
         categoryIdParameter.Value = _id;
@@ -183,7 +183,7 @@ namespace HairSalon.Models
       {
         MySqlConnection conn = DB.Connection();
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand("DELETE FROM categories WHERE id = @StylistId; DELETE FROM categories_clients WHERE stylist_id = @StylistId;", conn);
+        MySqlCommand cmd = new MySqlCommand("DELETE FROM stylists WHERE id = @StylistId; DELETE FROM categories_clients WHERE stylist_id = @StylistId;", conn);
         MySqlParameter stylistIdParameter = new MySqlParameter();
         stylistIdParameter.ParameterName = "@StylistId";
         stylistIdParameter.Value = this.GetId();
