@@ -168,37 +168,37 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT category_id FROM categories_items WHERE item_id = @itemId;";
-      MySqlParameter itemIdParameter = new MySqlParameter();
-      itemIdParameter.ParameterName = "@itemId";
-      itemIdParameter.Value = _id;
-      cmd.Parameters.Add(itemIdParameter);
+      cmd.CommandText = @"SELECT stylist_id FROM categories_clients WHERE client_id = @clientId;";
+      MySqlParameter clientIdParameter = new MySqlParameter();
+      clientIdParameter.ParameterName = "@clientId";
+      clientIdParameter.Value = _id;
+      cmd.Parameters.Add(clientIdParameter);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> categoryIds = new List<int> {};
+      List<int> stylistIds = new List<int> {};
       while(rdr.Read())
       {
-        int categoryId = rdr.GetInt32(0);
-        categoryIds.Add(categoryId);
+        int stylistId = rdr.GetInt32(0);
+        stylistIds.Add(stylistId);
       }
       rdr.Dispose();
       List<Stylist> categories = new List<Stylist> {};
-      foreach (int categoryId in categoryIds)
+      foreach (int stylistId in stylistIds)
       {
-        var categoryQuery = conn.CreateCommand() as MySqlCommand;
-        categoryQuery.CommandText = @"SELECT * FROM categories WHERE id = @StylistId;";
-        MySqlParameter categoryIdParameter = new MySqlParameter();
-        categoryIdParameter.ParameterName = "@StylistId";
-        categoryIdParameter.Value = categoryId;
-        categoryQuery.Parameters.Add(categoryIdParameter);
-        var categoryQueryRdr = categoryQuery.ExecuteReader() as MySqlDataReader;
-        while(categoryQueryRdr.Read())
+        var stylistQuery = conn.CreateCommand() as MySqlCommand;
+        stylistQuery.CommandText = @"SELECT * FROM categories WHERE id = @StylistId;";
+        MySqlParameter stylistIdParameter = new MySqlParameter();
+        stylistIdParameter.ParameterName = "@StylistId";
+        stylistIdParameter.Value = stylistId;
+        stylistQuery.Parameters.Add(stylistIdParameter);
+        var stylistQueryRdr = stylistQuery.ExecuteReader() as MySqlDataReader;
+        while(stylistQueryRdr.Read())
         {
-          int thisStylistId = categoryQueryRdr.GetInt32(0);
-          string categoryName = categoryQueryRdr.GetString(1);
-          Stylist foundStylist = new Stylist(categoryName, thisStylistId);
+          int thisStylistId = stylistQueryRdr.GetInt32(0);
+          string stylistName = stylistQueryRdr.GetString(1);
+          Stylist foundStylist = new Stylist(stylistName, thisStylistId);
           categories.Add(foundStylist);
         }
-        categoryQueryRdr.Dispose();
+        stylistQueryRdr.Dispose();
       }
       conn.Close();
       if (conn != null)
@@ -215,15 +215,15 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO categories_items (category_id, item_id) VALUES (@StylistId, @ClientId);";
-      MySqlParameter category_id = new MySqlParameter();
-      category_id.ParameterName = "@StylistId";
-      category_id.Value = newStylist.GetId();
-      cmd.Parameters.Add(category_id);
-      MySqlParameter item_id = new MySqlParameter();
-      item_id.ParameterName = "@ClientId";
-      item_id.Value = _id;
-      cmd.Parameters.Add(item_id);
+      cmd.CommandText = @"INSERT INTO categories_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+      MySqlParameter stylist_id = new MySqlParameter();
+      stylist_id.ParameterName = "@StylistId";
+      stylist_id.Value = newStylist.GetId();
+      cmd.Parameters.Add(stylist_id);
+      MySqlParameter client_id = new MySqlParameter();
+      client_id.ParameterName = "@ClientId";
+      client_id.Value = _id;
+      cmd.Parameters.Add(client_id);
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -239,11 +239,11 @@ namespace HairSalon.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"DELETE FROM items WHERE id = @ClientId; DELETE FROM categories_items WHERE item_id = @ClientId;";
-        MySqlParameter itemIdParameter = new MySqlParameter();
-        itemIdParameter.ParameterName = "@ClientId";
-        itemIdParameter.Value = this.GetId();
-        cmd.Parameters.Add(itemIdParameter);
+        cmd.CommandText = @"DELETE FROM clients WHERE id = @ClientId; DELETE FROM categories_clients WHERE client_id = @ClientId;";
+        MySqlParameter clientIdParameter = new MySqlParameter();
+        clientIdParameter.ParameterName = "@ClientId";
+        clientIdParameter.Value = this.GetId();
+        cmd.Parameters.Add(clientIdParameter);
         cmd.ExecuteNonQuery();
         if (conn != null)
         {
