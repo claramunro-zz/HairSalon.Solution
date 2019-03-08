@@ -181,6 +181,71 @@ namespace HairSalon.Tests
         }
 
 
+
+      [TestMethod]
+      public void GetStylists_ReturnsAllClientStylists_StylistList()
+      {
+        //Arrange
+        Client testClient = new Client("Mow the lawn");
+        testClient.Save();
+        Stylist testStylist1 = new Stylist("Home stuff");
+        testStylist1.Save();
+        Stylist testStylist2 = new Stylist("Work stuff");
+        testStylist2.Save();
+
+        //Act
+        testClient.AddStylist(testStylist1);
+        List<Stylist> result = testClient.GetStylists();
+        List<Stylist> testList = new List<Stylist> {testStylist1};
+
+        //Assert
+        CollectionAssert.AreEqual(testList, result);
+      }
+
+
+      [TestMethod]
+      public void AddStylist_AddsStylistToClient_StylistList()
+      {
+        //Arrange
+        Client testClient = new Client("Mow the lawn");
+        testClient.Save();
+        Stylist testStylist = new Stylist("Home stuff");
+        testStylist.Save();
+
+        //Act
+        testClient.AddStylist(testStylist);
+
+        List<Stylist> result = testClient.GetStylists();
+        List<Stylist> testList = new List<Stylist>{testStylist};
+
+        //Assert
+        CollectionAssert.AreEqual(testList, result);
+      }
+
+
+
+
+    [TestMethod]
+    public void Delete_DeletesClientAssociationsFromDatabase_ClientList()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("Home stuff");
+      testStylist.Save();
+      string testDescription = "Mow the lawn";
+      Client testClient = new Client(testDescription);
+      testClient.Save();
+
+      //Act
+      testClient.AddStylist(testStylist);
+      testClient.Delete();
+      List<Client> resultStylistClients = testStylist.GetClients();
+      List<Client> testStylistClients = new List<Client> {};
+
+      //Assert
+      CollectionAssert.AreEqual(testStylistClients, resultStylistClients);
+    }
+
+
     }
 
 }
