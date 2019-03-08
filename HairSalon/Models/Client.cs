@@ -162,51 +162,38 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
-
-   public List<Stylist> GetStylists()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT stylist_id FROM categories_clients WHERE client_id = @clientId;";
-      MySqlParameter clientIdParameter = new MySqlParameter();
-      clientIdParameter.ParameterName = "@clientId";
-      clientIdParameter.Value = _id;
-      cmd.Parameters.Add(clientIdParameter);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> stylistIds = new List<int> {};
-      while(rdr.Read())
-      {
-        int stylistId = rdr.GetInt32(0);
-        stylistIds.Add(stylistId);
-      }
-      rdr.Dispose();
-      List<Stylist> categories = new List<Stylist> {};
-      foreach (int stylistId in stylistIds)
-      {
-        var stylistQuery = conn.CreateCommand() as MySqlCommand;
-        stylistQuery.CommandText = @"SELECT * FROM categories WHERE id = @StylistId;";
-        MySqlParameter stylistIdParameter = new MySqlParameter();
-        stylistIdParameter.ParameterName = "@StylistId";
-        stylistIdParameter.Value = stylistId;
-        stylistQuery.Parameters.Add(stylistIdParameter);
-        var stylistQueryRdr = stylistQuery.ExecuteReader() as MySqlDataReader;
-        while(stylistQueryRdr.Read())
+        public List<Stylist> GetStylists()
         {
-          int thisStylistId = stylistQueryRdr.GetInt32(0);
-          string stylistName = stylistQueryRdr.GetString(1);
-          Stylist foundStylist = new Stylist(stylistName, thisStylistId);
-          categories.Add(foundStylist);
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText =
+
+            @"SELECT stylists.* FROM clients
+            JOIN stylists_clients ON (clients.id = stylists_clients.client_id)
+            JOIN stylists ON (stylists_clients.stylist_id = stylists.id)
+            WHERE clients.id = @clientId;";
+
+            MySqlParameter clientIdParameter = new MySqlParameter();
+            clientIdParameter.ParameterName = "@clientId";
+            clientIdParameter.Value = _id;
+            cmd.Parameters.Add(clientIdParameter);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            List<Stylist> stylists = new List<Stylist> { };
+            while (rdr.Read())
+            {
+                int stylistId = rdr.GetInt32(0);
+                string stylistDescription = rdr.GetString(1);
+                Stylist newStylist = new Stylist(stylistDescription, stylistId);
+                stylists.Add(newStylist);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return stylists;
         }
-        stylistQueryRdr.Dispose();
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return categories;
-    }
 
 
     

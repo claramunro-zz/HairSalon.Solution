@@ -93,50 +93,36 @@ namespace HairSalon.Models
 
 
 
- public List<Client> GetClients()
+  public List<Client> GetClients()
     {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT client_id FROM categories_clients WHERE stylist_id = @StylistId;";
-      MySqlParameter stylistIdParameter = new MySqlParameter();
-      stylistIdParameter.ParameterName = "@StylistId";
-      stylistIdParameter.Value = _id;
-      cmd.Parameters.Add(stylistIdParameter);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<int> clientIds = new List<int> {};
-      while(rdr.Read())
-      {
-        int clientId = rdr.GetInt32(0);
-        clientIds.Add(clientId);
-      }
-      rdr.Dispose();
-      List<Client> clients = new List<Client> {};
-      foreach (int clientId in clientIds)
-      {
-        var clientQuery = conn.CreateCommand() as MySqlCommand;
-        clientQuery.CommandText = @"SELECT * FROM clients WHERE id = @ClientId;";
-        MySqlParameter clientIdParameter = new MySqlParameter();
-        clientIdParameter.ParameterName = "@ClientId";
-        clientIdParameter.Value = clientId;
-        clientQuery.Parameters.Add(clientIdParameter);
-        var clientQueryRdr = clientQuery.ExecuteReader() as MySqlDataReader;
-        while(clientQueryRdr.Read())
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT clients.* FROM categories
+            JOIN categories_clients ON (categories.id = categories_clients.category_id)
+            JOIN clients ON (categories_clients.client_id = clients.id)
+            WHERE categories.id = @CategoryId;";
+        MySqlParameter categoryIdParameter = new MySqlParameter();
+        categoryIdParameter.ParameterName = "@CategoryId";
+        categoryIdParameter.Value = _id;
+        cmd.Parameters.Add(categoryIdParameter);
+        MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+        List<Client> clients = new List<Client>{};
+        while(rdr.Read())
         {
-          int thisClientId = clientQueryRdr.GetInt32(0);
-          string clientDescription = clientQueryRdr.GetString(1);
-          Client foundClient = new Client(clientDescription, thisClientId);
-          clients.Add(foundClient);
+          int clientId = rdr.GetInt32(0);
+          string clientDescription = rdr.GetString(1);
+          Client newClient = new Client(clientDescription, clientId);
+          clients.Add(newClient);
         }
-        clientQueryRdr.Dispose();
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return clients;
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return clients;
     }
+
 
 
 
