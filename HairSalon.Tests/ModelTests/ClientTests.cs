@@ -12,6 +12,7 @@ namespace HairSalon.Tests
     public void Dispose()
     {
       Client.ClearAll();
+      Stylist.ClearAll();
     }
 
       public ClientTest()
@@ -22,7 +23,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void ClientConstructor_CreatesInstanceOfClient_Client()
     {
-      Client newClient = new Client("test", 1);
+      Client newClient = new Client("test");
       Assert.AreEqual(typeof(Client), newClient.GetType());
     }
 
@@ -31,7 +32,7 @@ namespace HairSalon.Tests
     {
       //Arrange
       string description = "Walk the dog.";
-      Client newClient = new Client(description, 1);
+      Client newClient = new Client(description);
 
       //Act
       string result = newClient.GetDescription();
@@ -45,7 +46,7 @@ namespace HairSalon.Tests
     {
       //Arrange
       string description = "Walk the dog.";
-      Client newClient = new Client(description, 1);
+      Client newClient = new Client(description);
 
       //Act
       string updatedDescription = "Do the dishes";
@@ -76,9 +77,9 @@ namespace HairSalon.Tests
     //Arrange
     string description01 = "Walk the dog";
     string description02 = "Wash the dishes";
-    Client newClient1 = new Client(description01, 1);
+    Client newClient1 = new Client(description01);
     newClient1.Save();
-    Client newClient2 = new Client(description02, 1);
+    Client newClient2 = new Client(description02);
     newClient2.Save();
     List<Client> newList = new List<Client> { newClient1, newClient2 };
 
@@ -96,7 +97,7 @@ namespace HairSalon.Tests
       public void Find_ReturnsCorrectClientFromDatabase_Client()
       {
         //Arrange
-        Client testClient = new Client("Mow the lawn", 1);
+        Client testClient = new Client("Mow the lawn");
         testClient.Save();
 
         //Act
@@ -115,8 +116,8 @@ namespace HairSalon.Tests
       public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Client()
       {
         // Arrange, Act
-        Client firstClient = new Client("Mow the lawn", 1);
-        Client secondClient = new Client("Mow the lawn", 1);
+        Client firstClient = new Client("Mow the lawn");
+        Client secondClient = new Client("Mow the lawn");
 
         // Assert
         Assert.AreEqual(firstClient, secondClient);
@@ -126,7 +127,7 @@ namespace HairSalon.Tests
       public void Save_SavesToDatabase_ClientList()
       {
         //Arrange
-        Client testClient= new Client("Mow the lawn", 1);
+        Client testClient= new Client("Mow the lawn");
 
         //Act
         testClient.Save();
@@ -145,7 +146,7 @@ namespace HairSalon.Tests
         public void Save_AssignsIdToObject_Id()
         {
           //Arrange
-          Client testClient = new Client("Mow the lawn", 1);
+          Client testClient = new Client("Mow the lawn");
 
           //Act
           testClient.Save();
@@ -167,7 +168,7 @@ namespace HairSalon.Tests
         public void Edit_UpdatesClientInDatabase_String()
         {
           //Arrange
-          Client testClient = new Client("Walk the Dog", 1);
+          Client testClient = new Client("Walk the Dog");
           testClient.Save();
           string secondDescription = "Mow the lawn";
 
@@ -178,22 +179,6 @@ namespace HairSalon.Tests
           //Assert
           Assert.AreEqual(secondDescription, result);
         }
-
-
-
-        //  [TestMethod]
-        //   public void GetStylistId_ReturnsClientsParentStylistId_Int()
-        //   {
-        //     //Arrange
-        //     Stylist newStylist = new Stylist("Home Tasks");
-        //     Client newClient = new Client("Walk the dog.", 1, newStylist.GetId());
-
-        //     //Act
-        //     int result = newClient.GetStylistId();
-
-        //     //Assert
-        //     Assert.AreEqual(newStylist.GetId(), result);
-        //   }
 
 
     }
