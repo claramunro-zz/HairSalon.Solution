@@ -3,7 +3,7 @@
 <h1>Hair Salon</h1> 
 <hr>
 
-<h2>Specialty: @Model ["selectedSpecialty"] .GetStyle() </h2>
+<h2>Specialty:@Model["selectedSpecialty"].GetStyle()</h2>
 
 <hr />
 
@@ -17,11 +17,31 @@
 
 <h4>This Specialty has these stylists:</h4>
 
-<hr>
+@if (@Model["specialtyStylists"].Count != 0)
+{
+  <h4>This client has these stylists:</h4>
+  <ul>
+    @foreach (Stylist stylist in @Model["specialtyStylists"])
+    {
+      <li>@stylist.GetName()</li>
+    }
+  </ul>
+}
 
 <h4>Add a Stylist to this Specialty:</h4>
 
+<form action='/specialties/@Model["selectedSpecialty"].GetId()/stylists/new' method='post'>
+  <label for='stylistId'>Select a Stylist</label>
+  <select id='stylistId' name='stylistId' type='text'>
+    @foreach (var stylist in @Model["allStylists"])
+    {
+      <option value='@stylist.GetId()'>@stylist.GetName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
 <hr>
 
-<h4><a href="/clients">View All Clients</a></h4>
+<h4><a href="/specialties">View All Specialties</a></h4>
 <h4><a href="/">Home</a></h4>

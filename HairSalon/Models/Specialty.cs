@@ -84,7 +84,7 @@ namespace HairSalon.Models
         }
 
 
-        public List<Stylist> GetSpecialties()
+        public List<Stylist> GetStylists()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -129,8 +129,8 @@ namespace HairSalon.Models
             {
                 Specialty newSpecialty = (Specialty)otherSpecialty;
                 bool idEquality = (this.GetId() == newSpecialty.GetId());
-                bool descriptionEquality = (this.GetStyle() == newSpecialty.GetStyle());
-                return (idEquality && descriptionEquality);
+                bool styleEquality = (this.GetStyle() == newSpecialty.GetStyle());
+                return (idEquality && styleEquality);
             }
         }
 
@@ -154,32 +154,32 @@ namespace HairSalon.Models
             }
         }
 
-        // public void Edit(string newDescription)
-        // {
-        //     MySqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //     var cmd = conn.CreateCommand() as MySqlCommand;
-        //     cmd.CommandText = @"UPDATE clients SET description = @newDescription WHERE id = @searchId;";
-        //     MySqlParameter searchId = new MySqlParameter();
-        //     searchId.ParameterName = "@searchId";
-        //     searchId.Value = _id;
-        //     cmd.Parameters.Add(searchId);
-        //     MySqlParameter description = new MySqlParameter();
-        //     description.ParameterName = "@newDescription";
-        //     description.Value = newDescription;
-        //     cmd.Parameters.Add(description);
-        //     cmd.ExecuteNonQuery();
-        //     _description = newDescription;
-        //     conn.Close();
-        //     if (conn != null)
-        //     {
-        //         conn.Dispose();
-        //     }
-        // }
+        public void Edit(string newStyle)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE specialties SET style = @newStyle WHERE id = @searchId;";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = _id;
+            cmd.Parameters.Add(searchId);
+            MySqlParameter style = new MySqlParameter();
+            style.ParameterName = "@newStyle";
+            style.Value = newStyle;
+            cmd.Parameters.Add(style);
+            cmd.ExecuteNonQuery();
+            _style = newStyle;
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
 
 
 
-        public void AddSpecialty(Specialty newSpecialty)
+        public void AddStylist(Stylist newStylist)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -203,53 +203,37 @@ namespace HairSalon.Models
 
 
 
-        // public void Delete()
-        // {
-        //     MySqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //     var cmd = conn.CreateCommand() as MySqlCommand;
-        //     cmd.CommandText = @"DELETE FROM clients WHERE id = @clientId; DELETE FROM stylists_clients WHERE client_id = @clientId;";
-        //     MySqlParameter clientIdParameter = new MySqlParameter();
-        //     clientIdParameter.ParameterName = "@clientId";
-        //     clientIdParameter.Value = this.GetId();
-        //     cmd.Parameters.Add(clientIdParameter);
-        //     cmd.ExecuteNonQuery();
-        //     if (conn != null)
-        //     {
-        //         conn.Close();
-        //     }
-        // }
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM specialties WHERE id = @specialtyId; DELETE FROM stylists_specialties WHERE specialty_id = @specialtyId;";
+            MySqlParameter specialtyIdParameter = new MySqlParameter();
+            specialtyIdParameter.ParameterName = "@specialtyId";
+            specialtyIdParameter.Value = this.GetId();
+            cmd.Parameters.Add(specialtyIdParameter);
+            cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
 
 
-        // public static void ClearAll()
-        // {
-        //     MySqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //     var cmd = conn.CreateCommand() as MySqlCommand;
-        //     cmd.CommandText = @"DELETE FROM clients;";
-        //     cmd.ExecuteNonQuery();
-        //     conn.Close();
-        //     if (conn != null)
-        //     {
-        //         conn.Dispose();
-        //     }
-        // }
-
-
-
-        // //  public static void DeleteAll()
-        // //   {
-        // //       MySqlConnection conn = DB.Connection();
-        // //       conn.Open();
-        // //       var cmd = conn.CreateCommand() as MySqlCommand;
-        // //       cmd.CommandText = @"DELETE FROM stylists;";
-        // //       cmd.ExecuteNonQuery();
-        // //       conn.Close();
-        // //       if (conn != null)
-        // //       {
-        // //           conn.Dispose();
-        // //       }
-        // //   }
+        public static void ClearAll()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM specialties;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
 
 
 
