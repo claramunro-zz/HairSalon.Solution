@@ -83,7 +83,7 @@ namespace HairSalon.Controllers
             }
 
 
-        // [HttpPost("/clients/delete")]
+        // [HttpPost("/clients/deleteall")]
         //         public ActionResult DeleteAll()
         //         {
         //         Client.ClearAll();

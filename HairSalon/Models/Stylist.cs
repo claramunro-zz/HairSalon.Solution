@@ -8,15 +8,20 @@ namespace HairSalon.Models
         private string _name;
         private int _id;
 
-        public Stylist(string stylistName, int id = 0)
+        public Stylist(string name, int id = 0)
         {
-            _name = stylistName;
+            _name = name;
             _id = id;
         }
 
         public string GetName()
         {
             return _name;
+        }
+
+        public void SetName(string newName)
+        {
+            _name = newName;
         }
 
         public int GetId()

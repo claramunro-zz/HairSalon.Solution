@@ -19,7 +19,7 @@ namespace HairSalon.Tests
             ClientsController controller = new ClientsController();
 
             // Act
-            ActionResult view = controller.New(3);
+            ActionResult view = controller.New();
 
             // Assert
             Assert.IsInstanceOfType(view, typeof(ViewResult));
@@ -33,7 +33,7 @@ namespace HairSalon.Tests
             ClientsController controller = new ClientsController();
 
             // Act
-            ActionResult newView = controller.Show(1, 2);
+            ActionResult newView = controller.Show(1);
 
             // Assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
@@ -47,7 +47,7 @@ namespace HairSalon.Tests
             ClientsController controller = new ClientsController();
 
             // Act
-            ActionResult newView = controller.Edit(1, 2);
+            ActionResult newView = controller.Edit(1);
 
             // Assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
@@ -61,7 +61,7 @@ namespace HairSalon.Tests
             ClientsController controller = new ClientsController();
 
             // Act
-            ActionResult newView = controller.Update(1, 2, "tessst");
+            ActionResult newView = controller.Update(1, "tessst");
 
             // Assert
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
