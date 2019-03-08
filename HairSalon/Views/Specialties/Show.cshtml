@@ -1,0 +1,27 @@
+@using HairSalon.Models;
+
+<h1>Hair Salon</h1> 
+<hr>
+
+<h2>Specialty: @Model ["selectedSpecialty"] .GetStyle() </h2>
+
+<hr />
+
+<a href='/specialties/@Model["selectedSpecialty"].GetId()/edit'>Edit Specialty Style</a>
+
+<hr />
+
+<a href='/specialties/@Model["selectedSpecialty"].GetId()/delete'>Delete Specialty</a>
+
+<hr />
+
+<h4>This Specialty has these stylists:</h4>
+
+<hr>
+
+<h4>Add a Stylist to this Specialty:</h4>
+
+<hr>
+
+<h4><a href="/clients">View All Clients</a></h4>
+<h4><a href="/">Home</a></h4>
