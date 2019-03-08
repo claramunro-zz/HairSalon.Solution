@@ -1,7 +1,13 @@
 @using HairSalon.Models;
 
 <h1>Hair Salon</h1>
+<hr>
+
 <h2>Stylist: @Model["stylist"].GetName()</h2>
+<hr />
+EDIT STYLIST BUTTON HERE
+<hr />
+DELETE STYLIST BUTTON HERE
 <hr />
 
 @if (@Model["stylistClients"].Count != 0)
@@ -30,4 +36,7 @@
   <button type='submit'>Add</button>
 </form>
 
-<p><a href="/">Return to Main Page</a></p>
+<hr>
+
+<h4><a href="/clients">View All Clients</a></h4>
+<h4><a href="/">Home</a></h4>
