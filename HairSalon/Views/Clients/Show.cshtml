@@ -1,8 +1,33 @@
-<h1>stuff </h1>
+@using HairSalon.Models;
 
-<h2>@Model["client"].GetDescription()</h2>
-<h3>stylist: @Model["stylist"].GetName()</h3>
+<h1>Hair Salon</h1>
+<hr>
 
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this client</a>
-<a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>
-<a href='/stylists'>View all stylists</a>
+<h2>Client: @Model["selectedClient"].GetDescription()</h2>
+<hr />
+
+@if (@Model["clientStylists"].Count != 0)
+{
+  <h4>This client has these stylists:</h4>
+  <ul>
+    @foreach (Stylist stylist in @Model["clientStylists"])
+    {
+      <li>@stylist.GetName()</li>
+    }
+  </ul>
+}
+
+<h4>Add a stylist to this client:</h4>
+
+<form action='/clients/@Model["selectedClient"].GetId()/stylists/new' method='post'>
+  <label for='stylistId'>Select a Stylist</label>
+  <select id='stylistId' name='stylistId' type='text'>
+    @foreach (var stylist in @Model["allStylists"])
+    {
+      <option value='@stylist.GetId()'>@stylist.GetName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<p><a href="/">Return to Main Page</a></p>

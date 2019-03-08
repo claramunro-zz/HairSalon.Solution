@@ -202,7 +202,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO categories_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
       MySqlParameter stylist_id = new MySqlParameter();
       stylist_id.ParameterName = "@StylistId";
       stylist_id.Value = newStylist.GetId();
@@ -226,7 +226,7 @@ namespace HairSalon.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"DELETE FROM clients WHERE id = @ClientId; DELETE FROM categories_clients WHERE client_id = @ClientId;";
+        cmd.CommandText = @"DELETE FROM clients WHERE id = @ClientId; DELETE FROM stylists_clients WHERE client_id = @ClientId;";
         MySqlParameter clientIdParameter = new MySqlParameter();
         clientIdParameter.ParameterName = "@ClientId";
         clientIdParameter.Value = this.GetId();

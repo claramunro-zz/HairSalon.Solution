@@ -10,8 +10,8 @@ namespace HairSalon.Controllers
     [HttpGet("/clients")]
     public ActionResult Index()
     {
-      List<Client> allItems = Client.GetAll();
-      return View(allItems);
+      List<Client> allClients = Client.GetAll();
+      return View(allClients);
     }
 
 
@@ -25,23 +25,35 @@ namespace HairSalon.Controllers
     [HttpPost("/clients")]
     public ActionResult Create(string description)
     {
-      Client newItem = new Client(description);
-      newItem.Save();
-      List<Client> allItems = Client.GetAll();
-      return View("Index", allItems);
+      Client newClient= new Client(description);
+      newClient.Save();
+      List<Client> allClients = Client.GetAll();
+      return View("Index", allClients);
     }
 
 
-    // [HttpGet("/stylists/{stylistId}/clients/{clientId}")]
-    //     public ActionResult Show(int stylistId, int clientId)
-    //     {
-    //     Client client = Client.Find(clientId);
-    //     Dictionary<string, object> model = new Dictionary<string, object>();
-    //     Stylist stylist = Stylist.Find(stylistId);
-    //     model.Add("client", client);
-    //     model.Add("stylist", stylist);
-    //     return View(model);
-    //     }
+  [HttpGet("/clients/{id}")]
+  public ActionResult Show(int id)
+  {
+    Dictionary<string, object> model = new Dictionary<string, object>();
+    Client selectedClient = Client.Find(id);
+    List<Stylist> clientStylists = selectedClient.GetStylists();
+    List<Stylist> allStylists = Stylist.GetAll();
+    model.Add("selectedClient", selectedClient);
+    model.Add("clientStylists", clientStylists);
+    model.Add("allStylists", allStylists);
+    return View(model);
+  }
+
+
+      [HttpPost("/clients/{clientId}/stylists/new")]
+    public ActionResult AddStylist(int clientId, int stylistId)
+    {
+      Client client = Client.Find(clientId);
+      Stylist stylist = Stylist.Find(stylistId);
+      client.AddStylist(stylist);
+      return RedirectToAction("Show",  new { id = clientId });
+    }
 
 
     //   [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
