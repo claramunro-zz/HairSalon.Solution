@@ -13,62 +13,62 @@ namespace HairSalon.Tests
 
 
 
-        [TestMethod]
-        public void Index_ReturnsCorrectView_True()
-        {
-            // arrange
-            StylistsController controller = new StylistsController();
+        // [TestMethod]
+        // public void Index_ReturnsCorrectView_True()
+        // {
+        //     // arrange
+        //     StylistsController controller = new StylistsController();
 
-            // act
-            ActionResult indexView = controller.Index();
+        //     // act
+        //     ActionResult indexView = controller.Index();
 
-            // assert
-            Assert.IsInstanceOfType(indexView, typeof(ViewResult));
-        }
-
-
-        [TestMethod]
-        public void New_ReturnsCorrectView_True()
-        {
-            // arrange
-            StylistsController controller = new StylistsController();
-
-            // act
-            ActionResult newView = controller.New();
-
-            // assert
-            Assert.IsInstanceOfType(newView, typeof(ViewResult));
-        }
+        //     // assert
+        //     Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+        // }
 
 
+        // [TestMethod]
+        // public void New_ReturnsCorrectView_True()
+        // {
+        //     // arrange
+        //     StylistsController controller = new StylistsController();
 
-        [TestMethod]
-        public void Create_ReturnsCorrectView_True()
-        {
-            // Arrange
-            StylistsController controller = new StylistsController();
+        //     // act
+        //     ActionResult newView = controller.New();
 
-            // Act
-            ActionResult newView = controller.Create("tessst");
-
-            // Assert
-            Assert.IsInstanceOfType(newView, typeof(ViewResult));
-        }
+        //     // assert
+        //     Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        // }
 
 
 
-        [TestMethod]
-        public void Show_ReturnsCorrectView_True()
-        {
-            // arrange
-            StylistsController controller = new StylistsController();
+        // [TestMethod]
+        // public void Create_ReturnsCorrectView_True()
+        // {
+        //     // Arrange
+        //     StylistsController controller = new StylistsController();
 
-            // act
-            ActionResult newView = controller.Show(6);
+        //     // Act
+        //     ActionResult newView = controller.Create("tessst");
 
-            // assert
-            Assert.IsInstanceOfType(newView, typeof(ViewResult));
-        }
+        //     // Assert
+        //     Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        // }
+
+
+
+        // [TestMethod]
+        // public void Show_ReturnsCorrectView_True()
+        // {
+        //     // arrange
+        //     StylistsController controller = new StylistsController();
+
+        //     // act
+        //     ActionResult newView = controller.Show(6);
+
+        //     // assert
+        //     Assert.IsInstanceOfType(newView, typeof(ViewResult));
+        // }
 
 
 

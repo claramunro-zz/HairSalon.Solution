@@ -164,67 +164,67 @@ namespace HairSalon.Tests
 
 
 
-        [TestMethod]
-        public void GetClients_ReturnsAllStylistClients_ClientList()
-        {
-            //Arrange
-            Stylist testStylist = new Stylist("Household chores");
-            testStylist.Save();
-            Client testClient1 = new Client("Mow the lawn");
-            testClient1.Save();
-            Client testClient2 = new Client("Buy plane ticket");
-            testClient2.Save();
+        // [TestMethod]
+        // public void GetClients_ReturnsAllStylistClients_ClientList()
+        // {
+        //     //Arrange
+        //     Stylist testStylist = new Stylist("Household chores");
+        //     testStylist.Save();
+        //     Client testClient1 = new Client("Mow the lawn");
+        //     testClient1.Save();
+        //     Client testClient2 = new Client("Buy plane ticket");
+        //     testClient2.Save();
 
-            //Act
-            testStylist.AddClient(testClient1);
-            List<Client> savedClients = testStylist.GetClients();
-            List<Client> testList = new List<Client> { testClient1 };
+        //     //Act
+        //     testStylist.AddClient(testClient1);
+        //     List<Client> savedClients = testStylist.GetClients();
+        //     List<Client> testList = new List<Client> { testClient1 };
 
-            //Assert
-            CollectionAssert.AreEqual(testList, savedClients);
-        }
+        //     //Assert
+        //     CollectionAssert.AreEqual(testList, savedClients);
+        // }
 
 
-        [TestMethod]
-        public void Delete_DeletesStylistAssociationsFromDatabase_StylistList()
-        {
-            //Arrange
-            Client testClient = new Client("Mow the lawn");
-            testClient.Save();
-            string testName = "Home stuff";
-            Stylist testStylist = new Stylist(testName);
-            testStylist.Save();
+        // [TestMethod]
+        // public void Delete_DeletesStylistAssociationsFromDatabase_StylistList()
+        // {
+        //     //Arrange
+        //     Client testClient = new Client("Mow the lawn");
+        //     testClient.Save();
+        //     string testName = "Home stuff";
+        //     Stylist testStylist = new Stylist(testName);
+        //     testStylist.Save();
 
-            //Act
-            testStylist.AddClient(testClient);
-            testStylist.Delete();
-            List<Stylist> resultClientStylists = testClient.GetStylists();
-            List<Stylist> testClientStylists = new List<Stylist> { };
+        //     //Act
+        //     testStylist.AddClient(testClient);
+        //     testStylist.Delete();
+        //     List<Stylist> resultClientStylists = testClient.GetStylists();
+        //     List<Stylist> testClientStylists = new List<Stylist> { };
 
-            //Assert
-            CollectionAssert.AreEqual(testClientStylists, resultClientStylists);
-        }
+        //     //Assert
+        //     CollectionAssert.AreEqual(testClientStylists, resultClientStylists);
+        // }
 
-        [TestMethod]
-        public void Test_AddClient_AddsClientToStylist()
-        {
-            //Arrange
-            Stylist testStylist = new Stylist("Household chores");
-            testStylist.Save();
-            Client testClient = new Client("Mow the lawn");
-            testClient.Save();
-            Client testClient2 = new Client("Water the garden");
-            testClient2.Save();
+        // [TestMethod]
+        // public void Test_AddClient_AddsClientToStylist()
+        // {
+        //     //Arrange
+        //     Stylist testStylist = new Stylist("Household chores");
+        //     testStylist.Save();
+        //     Client testClient = new Client("Mow the lawn");
+        //     testClient.Save();
+        //     Client testClient2 = new Client("Water the garden");
+        //     testClient2.Save();
 
-            //Act
-            testStylist.AddClient(testClient);
-            testStylist.AddClient(testClient2);
-            List<Client> result = testStylist.GetClients();
-            List<Client> testList = new List<Client> { testClient, testClient2 };
+        //     //Act
+        //     testStylist.AddClient(testClient);
+        //     testStylist.AddClient(testClient2);
+        //     List<Client> result = testStylist.GetClients();
+        //     List<Client> testList = new List<Client> { testClient, testClient2 };
 
-            //Assert
-            CollectionAssert.AreEqual(testList, result);
-        }
+        //     //Assert
+        //     CollectionAssert.AreEqual(testList, result);
+        // }
 
 
 
