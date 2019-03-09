@@ -15,11 +15,9 @@
 
 <hr />
 
-<h4>This Specialty has these stylists:</h4>
-
 @if (@Model["specialtyStylists"].Count != 0)
 {
-  <h4>This client has these stylists:</h4>
+  <h4>This Specialty has these stylists:</h4>
   <ul>
     @foreach (Stylist stylist in @Model["specialtyStylists"])
     {
