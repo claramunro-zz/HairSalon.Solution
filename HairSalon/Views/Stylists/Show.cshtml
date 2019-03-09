@@ -10,6 +10,7 @@
 <a href='/stylists/@Model["selectedStylist"].GetId()/delete'>Delete Stylist</a>
 <hr />
 
+
 @if (@Model["stylistClients"].Count != 0)
 {
   <h4>Here are all the clients booked with this stylist:</h4>
@@ -20,21 +21,44 @@
     }
   </ul>
 }
-
 <h4>Add a client to this stylist:</h4>
-
 <form action='/stylists/@Model["selectedStylist"].GetId()/clients/new' method='post'>
   <label for='clientId'>Select A Client</label>
   <select id='clientId' name='clientId' type='text'>
-
     @foreach (var client in @Model["allClients"])
     {
       <option value='@client.GetId()'>@client.GetDescription()</option>
     }
-
   </select>
   <button type='submit'>Add</button>
 </form>
+<hr>
+
+
+@if (@Model["stylistSpecialites"].Count != 0)
+{
+  <h4>Specialties:</h4>
+  <ul>
+    @foreach (var specialty in @Model["stylistSpecialites"])
+    {
+      <li>@specialty.GetStyle() </li>
+    }
+  </ul>
+}
+<h4>Add a specialty to this stylist:</h4>
+<form action='/stylists/@Model["selectedStylist"].GetId()/clients/new' method='post'>
+  <label for='clientId'>Select A Client</label>
+  <select id='clientId' name='clientId' type='text'>
+    @foreach (var client in @Model["allClients"])
+    {
+      <option value='@client.GetId()'>@client.GetDescription()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+<hr>
+
+
 
 <hr>
 
