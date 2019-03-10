@@ -31,7 +31,7 @@ USE clara_munro;
 CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
 CREATE TABLE clients (id serial PRIMARY KEY, description VARCHAR(255));
 CREATE TABLE specialties (id serial PRIMARY KEY, style VARCHAR(255));
-CREATE TABLE stylsits_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
+CREATE TABLE stylists_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
 CREATE TABLE stylists_clients (id serial PRIMARY KEY, stylist_id int, client_id int);
 ```
 ```
@@ -40,7 +40,7 @@ USE clara_munro_test;
 CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
 CREATE TABLE clients (id serial PRIMARY KEY, description VARCHAR(255));
 CREATE TABLE specialties (id serial PRIMARY KEY, style VARCHAR(255));
-CREATE TABLE stylsits_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
+CREATE TABLE stylists_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
 CREATE TABLE stylists_clients (id serial PRIMARY KEY, stylist_id int, client_id int);
 ```
 
