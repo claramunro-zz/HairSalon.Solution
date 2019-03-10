@@ -29,13 +29,19 @@ Instructions to recreate database in MySQL prompt:
 CREATE DATABASE clara_munro;
 USE clara_munro;
 CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
-CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT);
+CREATE TABLE clients (id serial PRIMARY KEY, description VARCHAR(255));
+CREATE TABLE specialties (id serial PRIMARY KEY, style VARCHAR(255));
+CREATE TABLE stylsits_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
+CREATE TABLE stylists_clients (id serial PRIMARY KEY, stylist_id int, client_id int);
 ```
 ```
 CREATE DATABASE clara_munro_test;
 USE clara_munro_test;
 CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
-CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT);
+CREATE TABLE clients (id serial PRIMARY KEY, description VARCHAR(255));
+CREATE TABLE specialties (id serial PRIMARY KEY, style VARCHAR(255));
+CREATE TABLE stylsits_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
+CREATE TABLE stylists_clients (id serial PRIMARY KEY, stylist_id int, client_id int);
 ```
 
 * git clone this repository: https://github.com/claramunro/HairSalon.Solution.git
