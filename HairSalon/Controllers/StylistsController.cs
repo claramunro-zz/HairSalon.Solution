@@ -25,13 +25,13 @@ namespace HairSalon.Controllers
 
 
         [HttpPost("/stylists")]
-        public ActionResult Create(string stylistName)
+        public ActionResult Create(string name)
         {
-            Stylist newStylist = new Stylist(stylistName);
+            Stylist newStylist = new Stylist(name);
             newStylist.Save();
-            // List<Stylist> allStylists = Stylist.GetAll();
-            // return View("Index", allStylists);
-            return RedirectToAction("Index");
+            List<Stylist> allStylists = Stylist.GetAll();
+            return View("Index", allStylists);
+            // return RedirectToAction("Index");
 
         }
 
@@ -40,12 +40,12 @@ namespace HairSalon.Controllers
         public ActionResult Show(int id)
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
-            Stylist selectedStylist = Stylist.Find(id);
-            List<Specialty> stylistSpecialites = selectedStylist.GetSpecialties();
+            Stylist stylist = Stylist.Find(id);
+            List<Specialty> stylistSpecialites = stylist.GetSpecialties();
             List<Specialty> allSpecialties = Specialty.GetAll();
-            List<Client> stylistClients = selectedStylist.GetClients();
+            List<Client> stylistClients = stylist.GetClients();
             List<Client> allClients = Client.GetAll();
-            model.Add("selectedStylist", selectedStylist);
+            model.Add("stylist", stylist);
             model.Add("stylistSpecialites", stylistSpecialites);
             model.Add("allSpecialties", allSpecialties);
             model.Add("stylistClients", stylistClients);
@@ -87,19 +87,18 @@ namespace HairSalon.Controllers
         [HttpPost("/stylists/{stylistId}")]
         public ActionResult Update(int stylistId, string newName)
         {
-           
+            
             Dictionary<string, object> model = new Dictionary<string, object>();
-            Stylist selectedstylist = Stylist.Find(stylistId);
-
+            Stylist stylist = Stylist.Find(stylistId);
+            stylist.Edit(newName);
           
-            List<Specialty> stylistSpecialites = selectedstylist.GetSpecialties();
+            List<Specialty> stylistSpecialites = stylist.GetSpecialties();
             List<Specialty> allSpecialties = Specialty.GetAll();
 
-            List<Client> stylistClients = selectedstylist.GetClients();
+            List<Client> stylistClients = stylist.GetClients();
             List<Client> allClients = Client.GetAll();
 
-            selectedstylist.Edit(newName);
-
+            model.Add("stylist", stylist);
             model.Add("stylistSpecialties", stylistSpecialites);
             model.Add("stylistClients", stylistClients);
             model.Add("allClients", allClients);

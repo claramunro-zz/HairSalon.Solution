@@ -5,7 +5,7 @@
 
 <form action="/stylists/@Model["stylist"].GetId()" method="post">
   <label for="newName">Name:</label>
-  <input type="text" name="newName" value="@Model["stylist"].GetName()">
+  <input type="text" name="newName" value="@Model["stylist"].GetName()" required>
   <button type="submit">Update</button>
 </form>
 

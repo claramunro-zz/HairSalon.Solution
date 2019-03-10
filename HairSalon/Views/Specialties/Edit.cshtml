@@ -5,7 +5,7 @@
 
 <form action="/specialties/@Model["specialty"].GetId()" method="post">
   <label for="newStyle">Name:</label>
-  <input type="text" name="newStyle" value="@Model["specialty"].GetStyle()">
+  <input type="text" name="newStyle" value="@Model["specialty"].GetStyle()" required>
   <button type="submit">Update</button>
 </form>
 

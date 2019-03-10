@@ -39,9 +39,9 @@ namespace HairSalon.Models
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while (rdr.Read())
             {
-                int StylistId = rdr.GetInt32(0);
-                string StylistName = rdr.GetString(1);
-                Stylist newStylist = new Stylist(StylistName, StylistId);
+                int stylistId = rdr.GetInt32(0);
+                string stylistName = rdr.GetString(1);
+                Stylist newStylist = new Stylist(stylistName, stylistId);
                 allStylists.Add(newStylist);
             }
             conn.Close();
@@ -67,14 +67,14 @@ namespace HairSalon.Models
             searchId.Value = id;
             cmd.Parameters.Add(searchId);
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
-            int StylistId = 0;
-            string StylistName = "";
+            int stylistId = 0;
+            string stylistName = "";
             while (rdr.Read())
             {
-                StylistId = rdr.GetInt32(0);
-                StylistName = rdr.GetString(1);
+                stylistId = rdr.GetInt32(0);
+                stylistName = rdr.GetString(1);
             }
-            Stylist newStylist = new Stylist(StylistName, StylistId);
+            Stylist newStylist = new Stylist(stylistName, stylistId);
             conn.Close();
             if (conn != null)
             {
@@ -98,10 +98,10 @@ namespace HairSalon.Models
             WHERE stylists.id = @stylistId;";
 
 
-            MySqlParameter categoryIdParameter = new MySqlParameter();
-            categoryIdParameter.ParameterName = "@stylistId";
-            categoryIdParameter.Value = _id;
-            cmd.Parameters.Add(categoryIdParameter);
+            MySqlParameter stylistIdParameter = new MySqlParameter();
+            stylistIdParameter.ParameterName = "@stylistId";
+            stylistIdParameter.Value = _id;
+            cmd.Parameters.Add(stylistIdParameter);
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             List<Client> clients = new List<Client> { };
             while (rdr.Read())

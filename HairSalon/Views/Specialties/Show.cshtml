@@ -2,17 +2,11 @@
 
 <h1>Hair Salon</h1> 
 <hr>
-
 <h2>Specialty:@Model["selectedSpecialty"].GetStyle()</h2>
-
 <hr />
-
-<a href='/specialties/@Model["selectedSpecialty"].GetId()/edit'>Edit Specialty Style</a>
-
+<a href='/specialties/@Model["selectedSpecialty"].GetId()/edit'>Edit Specialty</a>
 <hr />
-
 <a href='/specialties/@Model["selectedSpecialty"].GetId()/delete'>Delete Specialty</a>
-
 <hr />
 
 @if (@Model["specialtyStylists"].Count != 0)
