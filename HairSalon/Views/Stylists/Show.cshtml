@@ -33,11 +33,11 @@
 <hr>
 
 
-@if (@Model["stylistSpecialites"].Count != 0)
+@if (@Model["stylistSpecialties"].Count != 0)
 {
   <h4>Specialties:</h4>
   <ul>
-    @foreach (var specialty in @Model["stylistSpecialites"])
+    @foreach (var specialty in @Model["stylistSpecialties"])
     {
       <li>@specialty.GetStyle()</li>
     }

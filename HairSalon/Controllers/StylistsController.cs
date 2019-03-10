@@ -41,12 +41,15 @@ namespace HairSalon.Controllers
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Stylist stylist = Stylist.Find(id);
-            List<Specialty> stylistSpecialites = stylist.GetSpecialties();
+
+            List<Specialty> stylistSpecialties = stylist.GetSpecialties();
             List<Specialty> allSpecialties = Specialty.GetAll();
+
             List<Client> stylistClients = stylist.GetClients();
             List<Client> allClients = Client.GetAll();
+            
             model.Add("stylist", stylist);
-            model.Add("stylistSpecialites", stylistSpecialites);
+            model.Add("stylistSpecialties", stylistSpecialties);
             model.Add("allSpecialties", allSpecialties);
             model.Add("stylistClients", stylistClients);
             model.Add("allClients", allClients);
@@ -88,10 +91,10 @@ namespace HairSalon.Controllers
         public ActionResult Update(int stylistId, string newName)
         {
             
-            Dictionary<string, object> model = new Dictionary<string, object>();
             Stylist stylist = Stylist.Find(stylistId);
             stylist.Edit(newName);
-          
+            Dictionary<string, object> model = new Dictionary<string, object>();
+
             List<Specialty> stylistSpecialites = stylist.GetSpecialties();
             List<Specialty> allSpecialties = Specialty.GetAll();
 
