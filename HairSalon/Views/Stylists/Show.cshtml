@@ -3,7 +3,7 @@
 <h1>Hair Salon</h1>
 <hr>
 
-<h2>Stylist: @Model["selectedStylist"].GetName()</h2>
+
 <hr />
 <a href='/stylists/@Model["selectedStylist"].GetId()/edit'>Edit Stylist Name</a>
 <hr />
@@ -41,17 +41,17 @@
   <ul>
     @foreach (var specialty in @Model["stylistSpecialites"])
     {
-      <li>@specialty.GetStyle() </li>
+      <li>@specialty.GetStyle()</li>
     }
   </ul>
 }
 <h4>Add a specialty to this stylist:</h4>
-<form action='/stylists/@Model["selectedStylist"].GetId()/clients/new' method='post'>
-  <label for='clientId'>Select A Client</label>
-  <select id='clientId' name='clientId' type='text'>
-    @foreach (var client in @Model["allClients"])
+<form action='/stylists/@Model["selectedStylist"].GetId()/specialties/new' method='post'>
+  <label for='specialtyId'>Select A Specialty</label>
+  <select id='specialtyId' name='specialtyId' type='text'>
+    @foreach (var specialty in @Model["allSpecialties"])
     {
-      <option value='@client.GetId()'>@client.GetDescription()</option>
+      <option value='@specialty.GetId()'>@specialty.GetStyle()</option>
     }
   </select>
   <button type='submit'>Add</button>

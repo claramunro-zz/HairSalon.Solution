@@ -288,8 +288,8 @@ namespace HairSalon.Models
             specialty_id.Value = newSpecialty.GetId();
             cmd.Parameters.Add(specialty_id);
             MySqlParameter stylist_id = new MySqlParameter();
-            specialty_id.ParameterName = "@stylistId";
-            specialty_id.Value = _id;
+            stylist_id.ParameterName = "@stylistId";
+            stylist_id.Value = _id;
             cmd.Parameters.Add(stylist_id);
             cmd.ExecuteNonQuery();
             conn.Close();
